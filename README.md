@@ -2,7 +2,7 @@
 
 ## Install
 
-````bash
+```bash
 #ssh
 $ git clone git@gitlab.com:voauth/securify-front.git
 #https
