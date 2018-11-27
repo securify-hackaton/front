@@ -1,5 +1,18 @@
 # Securify-front
 
+## Install
+
+````bash
+#ssh
+$ git clone git@gitlab.com:voauth/securify-front.git
+#https
+$ git clone https://gitlab.com/voauth/securify-front.git
+```
+
+```
+$ npm i
+```
+
 Scripts :
 
 ```bash
