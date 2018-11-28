@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import NavigationBar from './NavigationBar';
 import Navigation from './Navigation'
 
@@ -10,7 +9,6 @@ export default class Securify extends React.Component {
     return (
       <View style={styles.container}>
         <Navigation/>
-        <NavigationBar/>
       </View>
     );
   }

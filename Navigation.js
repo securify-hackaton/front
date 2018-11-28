@@ -3,6 +3,7 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Connections from './Connections'
 import Stats from './Stats'
+import Pendings from './Pendings'
 
 const AppStackNavigator = createStackNavigator({
   Connections: {
@@ -16,11 +17,23 @@ const AppStackNavigator = createStackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  Pendings: {
+    screen: Pendings,
+    navigationOptions: {
+      header: null
+    }
   }
 },
 {
-  initialRouteName: "Connections"
-})
+  initialRouteName: "Connections",
+  transitionConfig : () => ({
+  	transitionSpec: {
+  		duration: 0
+  	},
+  })
+},
+)
 
 const AppContainer = createAppContainer(AppStackNavigator);
 

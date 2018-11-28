@@ -15,13 +15,13 @@ class NavigationBar extends React.Component {
         <TouchableOpacity>
           <Image source={require('./assets/account.png')} style={Object.assign({}, styles.icon, styles.accountIcon)}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.changeRoute('stats')}>
+        <TouchableOpacity onPress={this.changeRoute.bind(this, 'Stats')}>
           <Image source={require('./assets/stats.png')} style={Object.assign({}, styles.icon, styles.statsIcon)}/>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.changeRoute.bind(this, 'Connections')}>
           <Image source={require('./assets/securify.png')} style={Object.assign({}, styles.icon, styles.securifyIcon)}/>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.changeRoute.bind(this, 'Pendings')}>
           <Image source={require('./assets/asking.png')} style={Object.assign({}, styles.icon, styles.askingIcon)}/>
         </TouchableOpacity>
         <TouchableOpacity>
