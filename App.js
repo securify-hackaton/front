@@ -1,12 +1,32 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { LinearGradient } from 'expo';
+import { Notifications, LinearGradient } from 'expo';
+
+import registerForPushNotificationsAsync from './registerForPushNotificationsAsync';
+
 
 export default class App extends React.Component {
+  componentDidMount() {
+    registerForPushNotificationsAsync()
+      .then(() => {
+        // Handle notifications that are received or selected while the app
+        // is open. If the app was closed and then opened by tapping the
+        // notification (rather than just tapping the app icon to open it),
+        // this function will fire on the next tick after the app starts
+        // with the notification data.
+        this._notificationSubscription = Notifications.addListener(this._handleNotification);
+      }).catch((error) => {
+        console.log(error.message)
+      })
+  }
+
+  _handleNotification = (notification) => {
+    this.setState({ notification: notification });
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on my app!</Text>
         <LinearGradient
           colors={['#3D393A', '#10101D']}
           style={{
@@ -16,8 +36,8 @@ export default class App extends React.Component {
             top: 0,
             bottom: 0
           }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
         />
       </View>
     );
