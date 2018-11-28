@@ -1,16 +1,22 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 export default class NavigationBar extends React.Component {
 
+  changeRoute(routeName) {
+    //this.props.navigation.navigate(routeName)
+  }
+
   render() {
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <View style={styles.youSpeedMyHeadRightRound}></View>
-        <TouchableOpacity >
+        <TouchableOpacity>
           <Image source={require('./assets/account.png')} style={Object.assign({}, styles.icon, styles.accountIcon)}/>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.changeRoute('stats')}>
           <Image source={require('./assets/stats.png')} style={Object.assign({}, styles.icon, styles.statsIcon)}/>
         </TouchableOpacity>
         <TouchableOpacity>

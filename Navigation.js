@@ -1,15 +1,27 @@
 // Navigation/Navigation.js
 
-import { createStackNavigator } from 'react-navigation'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
+import Connections from './Connections'
+import Stats from './Stats'
 
 const AppStackNavigator = createStackNavigator({
   Connections: {
     screen: Connections,
     navigationOptions: {
-      title: 'Connections'
+      header: null
     }
   },
-
+  Stats: {
+    screen: Stats,
+    navigationOptions: {
+      header: null
+    }
+  }
+},
+{
+  initialRouteName: "Connections"
 })
 
-export default AppStackNavigator
+const AppContainer = createAppContainer(AppStackNavigator);
+
+export default AppContainer
