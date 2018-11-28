@@ -1,15 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 
-export default class NavigationBar extends React.Component {
+class NavigationBar extends React.Component {
 
   changeRoute(routeName) {
-    //this.props.navigation.navigate(routeName)
+    this.props.navigation.navigate(routeName)
   }
 
   render() {
-    console.log(this.props)
     return (
       <View style={styles.container}>
         <View style={styles.youSpeedMyHeadRightRound}></View>
@@ -79,3 +78,5 @@ const styles = StyleSheet.create({
   dev: {
   }
 });
+
+export default withNavigation(NavigationBar);
