@@ -10,9 +10,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#BDBDBD"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -20,6 +20,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "notification": {
+      "icon": "./assets/icon_notification.png"
+    },
     "ios": {
       "supportsTablet": true
     }, 

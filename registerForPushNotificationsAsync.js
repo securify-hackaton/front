@@ -1,6 +1,7 @@
 import { Permissions, Notifications } from 'expo';
+import env from './config/env.config'
 
-const PUSH_ENDPOINT = 'http://137.74.194.236:3004/users/push-token';
+const PUSH_ENDPOINT = env.BASE_URL + '/users/push-token';
 
 async function registerForPushNotificationsAsync() {
     const { status: existingStatus } = await Permissions.getAsync(
