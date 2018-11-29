@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
-import NavigationBar from './NavigationBar';
 import { Notifications } from 'expo';
+import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
 import env from './config/env.config'
 

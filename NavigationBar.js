@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { StackActions, withNavigation } from 'react-navigation';
 
 class NavigationBar extends React.Component {
 
   changeRoute(routeName) {
-    this.props.navigation.navigate(routeName)
+    //this.props.navigation.navigate(routeName)
+    const replaceAction = StackActions.replace({routeName});
+    this.props.navigation.dispatch(replaceAction);
   }
 
   render() {
