@@ -1,23 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, AsyncStorage } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
 
 export default class Account extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
-  getUserInfos() {
-
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <Gradient/>
-        <Text style={{color: '#fff'}}>Hello I'm The Account Tab</Text>
+        <Text style={{color: '#fff'}}>Hello {this.props.screenProps.currentUser.firstName} {this.props.screenProps.currentUser.lastName}</Text>
         <Button
           onPress={this.props.screenProps.onLogOut}
           title="Sign Out"
