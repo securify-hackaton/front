@@ -13,6 +13,12 @@ export default class Account extends React.Component {
 
   }
 
+  goToCamera(routeName) {
+    this.props.navigation.navigate(routeName, {
+      httpUrl: '/image'
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -23,6 +29,11 @@ export default class Account extends React.Component {
           title="Sign Out"
           color="#841584"
           accessibilityLabel="Sign Out"
+        />
+        <Button
+          onPress={this.goToCamera.bind(this, 'Camera')}
+          title="Add picture of yourself"
+          color="#841584"
         />
         <NavigationBar/>
       </View>

@@ -1,34 +1,37 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, AsyncStorage } from 'react-native';
 import Gradient from './Gradient';
 import env from './config/env.config'
 
 
 export default class WaitingAuthenticate extends React.Component {
 
-	componentDidMount() {
+	async componentDidMount() {
 		const { navigation } = this.props;
+		const fieldName = navigation.getParam('fieldName', null);
+		const fieldValue = navigation.getParam('fieldValue', null);
+		const userToken = await AsyncStorage.getItem('userToken');
+		console.log('user token : ' + userToken);
 		const data = new FormData();
-		data.append(
-			navigation.getParam('fieldName', null),
-			navigation.getParam('fieldValue', null)
-		);
+		if(fieldName !== null && fieldValue !== null) data.append(fieldName, fieldValue);
 		data.append('image', {
 			uri: navigation.getParam('photo', null).uri,
 			type: 'image/jpeg',
 			name: 'photo'
 		})
-		return fetch(env.BASE_URL + navigation.getParam('httpUrl', null), {
-			method: 'POST',
-			headers: {
-				'Authorization': 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YmZmYmIyMjQ0ZWQwZTRlNTQ1MTIwYjciLCJpYXQiOjE1NDM0ODYyNDJ9.gF_FwjTbjgA5J2LPU-1kTiPEq7mgK2oPIuymZKsWKQc'
-			},
-			body: data
-		}).then((response) => {
+		try {
+			const response = await fetch(env.BASE_URL + navigation.getParam('httpUrl', null), {
+				method: 'POST',
+				headers: {
+					'Authorization': userToken
+				},
+				body: data
+			});
 			console.log(response);
-		}).catch((error) => {
+		}
+		catch (error) {
 			console.warn(error);
-		})
+		}
 	}
 
 	render() {

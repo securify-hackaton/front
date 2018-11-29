@@ -5,7 +5,7 @@ import Gradient from './Gradient';
 
 export default class Connections extends React.Component {
 
-  changeRoute(routeName) {
+  goToCamera(routeName) {
     this.props.navigation.navigate(routeName, {
       httpUrl: '/authenticate',
       fieldName: 'requestId',
@@ -19,7 +19,7 @@ export default class Connections extends React.Component {
         <Gradient />
         <Text style={{ color: '#fff' }}>Hello I'm The Connections Tab</Text>
         <Button
-          onPress={this.changeRoute.bind(this, 'Camera')}
+          onPress={this.goToCamera.bind(this, 'Camera')}
           title="Camera"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
