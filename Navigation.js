@@ -7,6 +7,7 @@ import Pendings from './Pendings'
 import Camera from './Camera'
 import Account from './Account'
 import WaitingAuthenticate from './WaitingAuthenticate'
+import Register from './Register'
 
 const AppStackNavigator = createStackNavigator({
   Account: {
@@ -41,6 +42,12 @@ const AppStackNavigator = createStackNavigator({
   },
   WaitingAuthenticate: {
     screen: WaitingAuthenticate,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Register: {
+    screen: Register,
     navigationOptions: {
       header: null
     }

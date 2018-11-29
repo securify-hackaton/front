@@ -2,26 +2,26 @@ import React from 'react';
 import { StyleSheet, View, Image, TextInput, Button, Text } from 'react-native';
 import { LinearGradient } from 'expo';
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
-  username = ''
+  username =  ''
   password = ''
-  message = 'LOGING'
+  message = 'REGISTER'
 
-  login() {
-    this.props.onLogin(this.username, this.password)
+  redirectToLogin(){
+    this.props.goToLogin()
+  }
+
+  register(){
+    
   }
 
   handleTextChange(type, text) {
     this[type] = text
-  }
-
-  redirectToRegister() {
-    this.props.goToRegister()
   }
 
   render() {
@@ -36,14 +36,15 @@ export default class Login extends React.Component {
             top: 0,
             bottom: 0
           }}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 1}}
         />
-        <Image source={require('./assets/logo.png')} style={{ position: 'absolute', top: -5, left: -70 }} />
+        <Image source={require('./assets/logo.png')} style={{position: 'absolute', top: -5, left: -70}}/>
         <View style={styles.loginForm}>
-          <TextInput
+          <Text style={styles.title}>Create your account</Text>          
+          <TextInput 
             style={Object.assign({}, styles.loginFormInputs, styles.firstInput)}
-            placeholder="Login"
+            placeholder="Insert your email"
             blurOnSubmit={true}
             onChangeText={this.handleTextChange.bind(this, 'username')}
           ></TextInput>
@@ -51,22 +52,21 @@ export default class Login extends React.Component {
             style={styles.loginFormInputs}
             textContentType="password"
             secureTextEntry={true}
-            placeholder="Mot de passe"
+            placeholder="Insert your password"
             blurOnSubmit={true}
             onChangeText={this.handleTextChange.bind(this, 'password')}
           ></TextInput>
           <Button
-            onPress={this.login.bind(this)}
-            title="Log to your account"
-            color="#509F7E"
-            accessibilityLabel="login"
-          />
-          <Text style={styles.title}>You don't have an account yet ?</Text>
-          <Button
-            onPress={this.redirectToRegister.bind(this)}
+            onPress={this.register.bind(this)}
             title="Register"
             color="#509F7E"
             accessibilityLabel="register"
+          />
+          <Button
+            onPress={this.redirectToLogin.bind(this)}
+            title="Back to login"
+            color="#509F7E"
+            accessibilityLabel="login"
             style={styles.redirectButton}
           />
         </View>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   redirectButton: {
-    alignItems: 'flex-start'
+    marginTop: 25
   },
   loginForm: {
     marginTop: 50,

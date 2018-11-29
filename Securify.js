@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, AsyncStorage } from 'react-native';
 import Navigation from './Navigation'
 import Login from './Login';
+import Register from './Register';
 import env from './config/env.config'
 
 export default class Securify extends React.Component {
@@ -11,7 +12,8 @@ export default class Securify extends React.Component {
     this.state = {
       isLoggedIn: false,
       user: {},
-      userToken: null
+      userToken: null,
+      whichPage: 'login'
     }
   }
 
@@ -86,7 +88,21 @@ export default class Securify extends React.Component {
     }
   }
 
+  goToRegister(){
+    this.state.whichPage = 'register';
+    console.log('go To register');
+    this.forceUpdate();
+  }
+
+  goToLogin(){
+    this.state.whichPage = 'login';
+    console.log('go To login');
+    this.forceUpdate();
+  }
+
   render() {
+    let whichPage = this.state.whichPage;  
+
     if (this.state.isLoggedIn) {
       return (
         <View style={styles.container}>
@@ -98,11 +114,20 @@ export default class Securify extends React.Component {
         </View>
       );
     }
-    return (
-      <View style={styles.container}>
-        <Login onLogin={this.loginUser.bind(this)}/>
-      </View>
-    );
+    if(whichPage === 'login') {
+      return (
+        <View style={styles.container}>
+          <Login onLogin={this.loginUser.bind(this)} goToRegister={this.goToRegister.bind(this)}/>
+        </View>
+      );
+    } else if (whichPage === 'register') {
+      return (
+        <View style={styles.container}>
+          <Register goToLogin={this.goToLogin.bind(this)}/>
+        </View>
+      );
+    }
+    
   }
 }
 
