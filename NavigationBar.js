@@ -12,7 +12,7 @@ class NavigationBar extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.youSpeedMyHeadRightRound}></View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.changeRoute.bind(this, 'Account')}>
           <Image source={require('./assets/account.png')} style={Object.assign({}, styles.icon, styles.accountIcon)}/>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.changeRoute.bind(this, 'Stats')}>

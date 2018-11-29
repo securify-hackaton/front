@@ -4,8 +4,15 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Connections from './Connections'
 import Stats from './Stats'
 import Pendings from './Pendings'
+import Account from './Account'
 
 const AppStackNavigator = createStackNavigator({
+  Account: {
+    screen: Account,
+    navigationOptions: {
+      header: null
+    }
+  },
   Connections: {
     screen: Connections,
     navigationOptions: {
