@@ -31,9 +31,8 @@ export default class WaitingAuthenticate extends React.Component {
 				body: data
 			});
 			console.log(response);
-			const responseJson = await response.json()
-			if (responseJson.status >= 400) {
-				console.warn(responseJson.message)
+			if (response.status >= 400) {
+				console.warn("Something went wrong")
 				this.props.navigation.navigate('Camera', {
 					httpUrl: httpUrl,
 					fieldName: fieldName,
@@ -67,7 +66,7 @@ export default class WaitingAuthenticate extends React.Component {
 						right: 0,
 						top: 0,
 						bottom: 0,
-						opacity: 0.9
+						opacity: 0.7
 					}}
 					source={{ uri: photo }} />
 				<ActivityIndicator size="large" />

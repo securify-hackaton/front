@@ -12,8 +12,14 @@ export default class Pendings extends React.Component {
     }
   }
 
-  autoriser() {
+  autoriser(pendingId) {
     console.log('Autoriser')
+    this.props.navigation.navigate('Camera', {
+      httpUrl: '/authenticate',
+      fieldName: 'requestId',
+      fieldValue: pendingId,
+      onSuccess: 'Connections'
+    })
   }
 
   refuser() {
@@ -52,7 +58,7 @@ export default class Pendings extends React.Component {
   render() {
     RenderPendings = () => {
       console.log(this.state.pendings)
-      const pendings = this.state.pendings.sort((a, b) => a.createdDate < b.createdDate).map((pending, index) => (
+      const pendings = this.state.pendings.sort((a, b) => a.createdDate > b.createdDate).map((pending, index) => (
         <View key={pending._id}
           style={{
             position: 'absolute',
@@ -102,7 +108,7 @@ export default class Pendings extends React.Component {
             <Text style={{color: '#fff', fontSize: 30, padding: 10, textAlign: 'center', width: '80%'}}>{pending.company.name} souhaite vous authentifier</Text>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'column'}}>
-            <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#509F7E', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.refuser}>
+            <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#509F7E', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.autoriser.bind(this, pending._id)}>
               <Text style={{color: '#fff', fontSize: 20}}>Autoriser</Text>
             </TouchableOpacity>
           </View>
