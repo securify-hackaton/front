@@ -10,7 +10,7 @@ export default class WaitingAuthenticate extends React.Component {
 		const { navigation } = this.props;
 		const fieldName = navigation.getParam('fieldName', null);
 		const fieldValue = navigation.getParam('fieldValue', null);
-		const userToken = await AsyncStorage.getItem('userToken');
+		const userToken = this.props.screenProps.userToken;
 		console.log('user token : ' + userToken);
 		const data = new FormData();
 		if(fieldName !== null && fieldValue !== null) data.append(fieldName, fieldValue);
