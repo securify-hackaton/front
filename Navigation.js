@@ -4,6 +4,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Connections from './Connections'
 import Stats from './Stats'
 import Pendings from './Pendings'
+import Camera from './Camera'
 
 const AppStackNavigator = createStackNavigator({
   Connections: {
@@ -20,6 +21,12 @@ const AppStackNavigator = createStackNavigator({
   },
   Pendings: {
     screen: Pendings,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Camera: {
+    screen: Camera,
     navigationOptions: {
       header: null
     }
