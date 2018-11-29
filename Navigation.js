@@ -6,6 +6,7 @@ import Stats from './Stats'
 import Pendings from './Pendings'
 import Camera from './Camera'
 import Account from './Account'
+import WaitingAuthenticate from './WaitingAuthenticate'
 
 const AppStackNavigator = createStackNavigator({
   Account: {
@@ -37,16 +38,22 @@ const AppStackNavigator = createStackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  WaitingAuthenticate: {
+    screen: WaitingAuthenticate,
+    navigationOptions: {
+      header: null
+    }
   }
 },
-{
-  initialRouteName: "Connections",
-  transitionConfig : () => ({
-  	transitionSpec: {
-  		duration: 0
-  	},
-  })
-},
+  {
+    initialRouteName: "Connections",
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 0
+      },
+    })
+  },
 )
 
 const AppContainer = createAppContainer(AppStackNavigator);

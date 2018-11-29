@@ -1,5 +1,5 @@
 const env = {
-    BASE_URL: "http://137.74.194.236:3004"
+    BASE_URL: "https://securify-server.herokuapp.com"
 }
 
 export default env;

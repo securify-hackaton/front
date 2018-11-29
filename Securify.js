@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, AsyncStorage } from 'react-native';
 import Navigation from './Navigation'
 import Login from './Login';
+import env from './config/env.config'
 
 export default class Securify extends React.Component {
 
@@ -19,7 +20,7 @@ export default class Securify extends React.Component {
   async callLoginApi(email, password) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('http://137.74.194.236:3004/login', {
+        const response = await fetch(env.BASE_URL + '/login', {
           method: 'POST',
           headers: {
             Accept: 'application/json',

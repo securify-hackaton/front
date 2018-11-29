@@ -6,7 +6,9 @@ import Gradient from './Gradient';
 export default class Connections extends React.Component {
 
   changeRoute(routeName) {
-    this.props.navigation.navigate(routeName)
+    this.props.navigation.navigate(routeName, {
+      requestId: '5bffdbe1ec8dc70016078255'
+    })
   }
 
   render() {
@@ -16,7 +18,7 @@ export default class Connections extends React.Component {
         <Text style={{ color: '#fff' }}>Hello I'm The Connections Tab</Text>
         <Button
           onPress={this.changeRoute.bind(this, 'Camera')}
-          title="Learn More"
+          title="Camera"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
