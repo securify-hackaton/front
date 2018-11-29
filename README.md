@@ -10,6 +10,7 @@ $ git clone https://gitlab.com/voauth/securify-front.git
 ```
 
 ```
+$ npm i -g expo expo-cli
 $ npm i
 ```
 
