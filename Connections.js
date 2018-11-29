@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
 
@@ -8,9 +8,9 @@ export default class Connections extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Gradient/>
-        <Text style={{color: '#fff'}}>Hello I'm The Connections Tab</Text>
-        <NavigationBar/>
+        <Gradient />
+        <Text style={{ color: '#fff' }}>Hello I'm The Connections Tab</Text>
+        <NavigationBar />
       </View>
     );
   }

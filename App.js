@@ -1,7 +1,10 @@
 import React from 'react';
 import Login from './Login';
 import Securify from './Securify';
-import { Notifications } from 'expo';
+
+// TO DO : export to register
+// import { Notifications } from 'expo';
+
 // import registerForPushNotificationsAsync from './registerForPushNotificationsAsync';
 
 export default class App extends React.Component {
