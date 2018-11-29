@@ -5,8 +5,15 @@ import Connections from './Connections'
 import Stats from './Stats'
 import Pendings from './Pendings'
 import Camera from './Camera'
+import Account from './Account'
 
 const AppStackNavigator = createStackNavigator({
+  Account: {
+    screen: Account,
+    navigationOptions: {
+      header: null
+    }
+  },
   Connections: {
     screen: Connections,
     navigationOptions: {
