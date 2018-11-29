@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
 
@@ -10,6 +10,14 @@ export default class Pendings extends React.Component {
     this.state = {
       pendings: []
     }
+  }
+
+  autoriser() {
+    console.log('Autoriser')
+  }
+
+  refuser() {
+    console.log('Refuser')
   }
 
   async getPendings() {
@@ -44,7 +52,7 @@ export default class Pendings extends React.Component {
   render() {
     RenderPendings = () => {
       console.log(this.state.pendings)
-      const pendings = this.state.pendings.sort((a, b) => a.createdDate > b.createdDate).map((pending, index) => (
+      const pendings = this.state.pendings.sort((a, b) => a.createdDate < b.createdDate).map((pending, index) => (
         <View key={pending._id}
           style={{
             position: 'absolute',
@@ -57,11 +65,52 @@ export default class Pendings extends React.Component {
           }}
         >
           <Gradient style={{position: 'absolute'}}></Gradient>
-          <View>
-            <Image source={require('./assets/pending-logo.png')} style={{width: 100, height: 100, borderRadius: 50}}/>
-            <Image source={{uri: pending.company.image}} style={{width: 100, height: 100, borderRadius: 50}}/>
+          <View style={{flex: 0.4, alignItems: 'center', justifyContent: 'center', marginTop: 25}}>
+            <View style={{
+              width: 140,
+              height: 140,
+              borderRadius: 75,
+              backgroundColor: '#0F0F11',
+              position: 'absolute',
+              zIndex: 1,
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              transform: [{'translateX': -40}, {'translateY': -20}]
+            }}>
+              <Image source={{uri: pending.company.image}} style={{width: 80, height: 80}}/>
+            </View>
+            <View style={{
+              width: 120,
+              height: 120,
+              borderRadius: 75,
+              backgroundColor: '#0F0F11',
+              position: 'absolute',
+              zIndex: 0,
+              transform: [{'translateX': 40}, {'translateY': 20}]
+            }}>
+            </View>
+            <Image source={require('./assets/pending-logo.png')} style={{
+              width: 60,
+              height: 60,
+              position: 'absolute',
+              zIndex: 3,
+              transform: [{'translateX': 40}, {'translateY': 20}]
+            }}/>
           </View>
-          <Text style={{color:'#fff', marginTop:25}}>{pending.company.name} souhaite vous authentifier</Text>
+          <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={{color: '#fff', fontSize: 30, padding: 10, textAlign: 'center', width: '80%'}}>{pending.company.name} souhaite vous authentifier</Text>
+          </View>
+          <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'column'}}>
+            <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#509F7E', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.refuser}>
+              <Text style={{color: '#fff', fontSize: 20}}>Autoriser</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'column'}}>
+            <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#BD413A', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.refuser}>
+              <Text style={{color: '#fff', fontSize: 20}}>Refuser</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       ))
       return pendings
