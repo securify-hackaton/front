@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Securify-front",
-    "description": "This project is really great.",
-    "slug": "Securify-front",
+    "name": "Securify",
+    "description": "Connect with face recognition",
+    "slug": "Securify",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": ["ios", "android"],
@@ -10,9 +10,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#BDBDBD"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -20,8 +20,14 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "notification": {
+      "icon": "./assets/icon_notification.png"
+    },
     "ios": {
       "supportsTablet": true
+    }, 
+    "android": {
+      "package": "com.domange.voauth"
     }
   }
 }
