@@ -18,15 +18,16 @@ export default class Account extends React.Component {
         <Gradient/>
         <Text style={{color: '#fff'}}>Hello {this.props.screenProps.currentUser.firstName} {this.props.screenProps.currentUser.lastName}</Text>
         <Button
-          onPress={this.props.screenProps.onLogOut}
-          title="Sign Out"
-          color="#841584"
-          accessibilityLabel="Sign Out"
-        />
-        <Button
           onPress={this.goToCamera.bind(this, 'Camera')}
           title="Add picture of yourself"
-          color="#841584"
+          color="#509F7E"
+        />
+        <Button
+          onPress={this.props.screenProps.onLogOut}
+          title="Sign Out"
+          color="#509F7E"
+          style={styles.signOut}
+          accessibilityLabel="Sign Out"
         />
         <NavigationBar/>
       </View>
@@ -42,5 +43,8 @@ const styles = StyleSheet.create({
   },
   mainText: {
     color: '#fff'
+  },
+  signOut: {
+    marginTop: '20px'
   }
 });

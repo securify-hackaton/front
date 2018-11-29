@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
-import { Camera, Permissions, FaceDetector } from 'expo';
-import env from './config/env.config'
+import { Text, View, Dimensions } from 'react-native';
+import { Camera, Permissions, FaceDetector, ImageManipulator } from 'expo';
 
 export default class CameraExample extends React.Component {
   state = {
@@ -10,10 +9,10 @@ export default class CameraExample extends React.Component {
   };
 
   async componentDidMount() {
-		const { navigation } = this.props;    
+    const { navigation } = this.props;
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     console.log("camera onsuccess : " + navigation.getParam('onSuccess', null))
-    this.setState({ 
+    this.setState({
       hasCameraPermission: status === 'granted',
       httpUrl: navigation.getParam('httpUrl', null),
       fieldName: navigation.getParam('fieldName', null),
@@ -31,13 +30,19 @@ export default class CameraExample extends React.Component {
       this.camera.takePictureAsync()
         .then((photo) => {
           console.log(photo)
-          this.props.navigation.navigate('WaitingAuthenticate', {
-            photo: photo,
-            httpUrl: this.state.httpUrl,
-            fieldName: this.state.fieldName,
-            fieldValue: this.state.fieldValue,
-            onSuccess: this.state.onSuccess
-          });
+          const { height, width } = Dimensions.get('window');
+          ImageManipulator.manipulateAsync(photo.uri, [{width, height}], {compress: 0.25, format: 'jpeg'})
+            .then((compressedPhoto) => {
+              console.log('compressed : ');
+              console.log(compressedPhoto);
+              this.props.navigation.navigate('WaitingAuthenticate', {
+                photo: compressedPhoto,
+                httpUrl: this.state.httpUrl,
+                fieldName: this.state.fieldName,
+                fieldValue: this.state.fieldValue,
+                onSuccess: this.state.onSuccess
+              });
+            })
         })
     }
   }
