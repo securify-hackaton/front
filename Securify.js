@@ -47,7 +47,6 @@ export default class Securify extends React.Component {
       await AsyncStorage.setItem('isLoggedIn', 'true')
       await AsyncStorage.setItem('currentUser', JSON.stringify(response.user))
       await AsyncStorage.setItem('userToken', JSON.stringify(response.token))
-      console.log('OK')
       this.setState({isLoggedIn: true})
     } catch (error) {
       console.warn(error.message)
