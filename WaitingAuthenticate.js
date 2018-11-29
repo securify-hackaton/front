@@ -8,15 +8,17 @@ export default class WaitingAuthenticate extends React.Component {
 
 	componentDidMount() {
 		const { navigation } = this.props;
-		console.log("requestID = " + navigation.getParam('requestId', 'toto'));
 		const data = new FormData();
-		data.append('requestId', navigation.getParam('requestId', null));
+		data.append(
+			navigation.getParam('fieldName', null),
+			navigation.getParam('fieldValue', null)
+		);
 		data.append('image', {
 			uri: navigation.getParam('photo', null).uri,
 			type: 'image/jpeg',
 			name: 'photo'
 		})
-		return fetch(env.BASE_URL + '/authenticate', {
+		return fetch(env.BASE_URL + navigation.getParam('httpUrl', null), {
 			method: 'POST',
 			headers: {
 				'Authorization': 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YmZmYmIyMjQ0ZWQwZTRlNTQ1MTIwYjciLCJpYXQiOjE1NDM0ODYyNDJ9.gF_FwjTbjgA5J2LPU-1kTiPEq7mgK2oPIuymZKsWKQc'
@@ -30,13 +32,10 @@ export default class WaitingAuthenticate extends React.Component {
 	}
 
 	render() {
-		const { navigation } = this.props;
-
 		return (
 			<View style={styles.container}>
 				<Gradient />
-				<ActivityIndicator size="large"/>
-				{/* <Image source=(na) */}
+				<ActivityIndicator size="large" />
 			</View>
 		);
 	}

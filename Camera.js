@@ -15,7 +15,9 @@ export default class CameraExample extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ 
       hasCameraPermission: status === 'granted',
-      requestId: navigation.getParam('requestId', null)
+      httpUrl: navigation.getParam('httpUrl', null),
+      fieldName: navigation.getParam('fieldName', null),
+      fieldValue: navigation.getParam('fieldValue', null)
     });
     console.log(this.state);
   }
@@ -29,7 +31,9 @@ export default class CameraExample extends React.Component {
           console.log(photo)
           this.props.navigation.navigate('WaitingAuthenticate', {
             photo: photo,
-            requestId: this.state.requestId
+            httpUrl: this.state.httpUrl,
+            fieldName: this.state.fieldName,
+            fieldValue: this.state.fieldValue
           });
         })
     }

@@ -7,7 +7,9 @@ export default class Connections extends React.Component {
 
   changeRoute(routeName) {
     this.props.navigation.navigate(routeName, {
-      requestId: '5bffdbe1ec8dc70016078255'
+      httpUrl: '/authenticate',
+      fieldName: 'requestId',
+      fieldValue: '5bffdbe1ec8dc70016078255'
     })
   }
 
