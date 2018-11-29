@@ -4,12 +4,16 @@ import { LinearGradient } from 'expo';
 
 export default class Login extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   username =  ''
   password = ''
   message = 'LOGING'
 
   login() {
-    console.log(`${this.message} : ${this.username} with password ${this.password}`);
+    this.props.onLogin(this.username, this.password)
   }
 
   handleTextChange(type, text) {
