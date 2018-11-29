@@ -7,10 +7,11 @@ export default class Account extends React.Component {
 
   goToCamera(routeName) {
     this.props.navigation.navigate(routeName, {
-      httpUrl: '/image'
+      httpUrl: '/image',
+      onSuccess: 'Account'
     })
   }
-  
+
   render() {
     return (
       <View style={styles.container}>
