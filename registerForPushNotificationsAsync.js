@@ -1,6 +1,6 @@
 import { Permissions, Notifications } from 'expo';
 
-const PUSH_ENDPOINT = 'http://137.74.194.236:3004/users/push-token';
+const PUSH_ENDPOINT = 'https://securify-server.herokuapp.com/users/push-token';
 
 async function registerForPushNotificationsAsync() {
     const { status: existingStatus } = await Permissions.getAsync(

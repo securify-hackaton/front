@@ -5,29 +5,11 @@ import Gradient from './Gradient';
 
 export default class Account extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {}
-    }
-  }
-
-  async componentWillMount() {
-    const user = await this.getUserInfos()
-    this.setState({user})
-  }
-
-  async getUserInfos() {
-    const user = await AsyncStorage.getItem('currentUser')
-    const jsonUser = JSON.parse(user)
-    return jsonUser
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <Gradient/>
-        <Text style={{color: '#fff'}}>Hello {this.state.user.firstName} {this.state.user.lastName}</Text>
+        <Text style={{color: '#fff'}}>Hello {this.props.screenProps.currentUser.firstName} {this.props.screenProps.currentUser.lastName}</Text>
         <Button
           onPress={this.props.screenProps.onLogOut}
           title="Sign Out"

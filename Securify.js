@@ -8,7 +8,9 @@ export default class Securify extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      user: {},
+      userToken: null
     }
   }
 
@@ -19,7 +21,7 @@ export default class Securify extends React.Component {
   async callLoginApi(email, password) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('http://137.74.194.236:3004/login', {
+        const response = await fetch('https://securify-server.herokuapp.com/login', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -47,7 +49,11 @@ export default class Securify extends React.Component {
       await AsyncStorage.setItem('isLoggedIn', 'true')
       await AsyncStorage.setItem('currentUser', JSON.stringify(response.user))
       await AsyncStorage.setItem('userToken', JSON.stringify(response.token))
-      this.setState({isLoggedIn: true})
+      this.setState({
+        isLoggedIn: true,
+        user: response.user,
+        userToken: response.token
+      })
     } catch (error) {
       console.warn(error.message)
     }
@@ -56,7 +62,15 @@ export default class Securify extends React.Component {
   async isLoggedIn() {
     try {
       const isLoggedIn = await AsyncStorage.getItem('isLoggedIn') || false
-      this.setState({isLoggedIn})
+      if (isLoggedIn) {
+        const user = await AsyncStorage.getItem('currentUser')
+        const token = await AsyncStorage.getItem('userToken')
+        this.setState({
+          isLoggedIn,
+          user: JSON.parse(user),
+          userToken: JSON.parse(token)
+        })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -76,7 +90,9 @@ export default class Securify extends React.Component {
       return (
         <View style={styles.container}>
           <Navigation screenProps={{
-            onLogOut:this.signOut.bind(this)
+            onLogOut: this.signOut.bind(this),
+            currentUser: this.state.user,
+            userToken: this.state.userToken 
           }}/>
         </View>
       );
