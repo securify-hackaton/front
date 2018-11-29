@@ -31,7 +31,7 @@ export default class CameraExample extends React.Component {
         .then((photo) => {
           console.log(photo)
           const { height, width } = Dimensions.get('window');
-          ImageManipulator.manipulateAsync(photo.uri, [{width, height}], {compress: 0.25, format: 'jpeg'})
+          ImageManipulator.manipulateAsync(photo.uri, [{width, height}], {compress: 0.15, format: 'jpeg'})
             .then((compressedPhoto) => {
               console.log('compressed : ');
               console.log(compressedPhoto);

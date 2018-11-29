@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import NavigationBar from './NavigationBar';
+import { Notifications } from 'expo';
 import Gradient from './Gradient';
+import env from './config/env.config'
 
 export default class Pendings extends React.Component {
 
@@ -13,7 +15,6 @@ export default class Pendings extends React.Component {
   }
 
   autoriser(pendingId) {
-    console.log('Autoriser')
     this.props.navigation.navigate('Camera', {
       httpUrl: '/authenticate',
       fieldName: 'requestId',
@@ -22,8 +23,33 @@ export default class Pendings extends React.Component {
     })
   }
 
-  refuser() {
-    console.log('Refuser')
+  async refuser(pendingId) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await fetch(env.BASE_URL + '/tokens/revoke', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: this.props.screenProps.userToken
+          },
+          body: JSON.stringify({
+            tokenId: pendingId
+          }),
+        })
+        const responseJson = await response.json()
+        if (response.status >= 400) {
+          throw new Error(responseJson.message)
+        }
+        const pendings = await this.getPendings()
+        this.setState({
+          pendings
+        })
+        resolve(responseJson)
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 
   async getPendings() {
@@ -62,7 +88,7 @@ export default class Pendings extends React.Component {
         <View key={pending._id}
           style={{
             position: 'absolute',
-            zIndex: index,
+            zIndex: (index + 1),
             top: 0,
             left: 0,
             bottom: 0,
@@ -113,7 +139,7 @@ export default class Pendings extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'column'}}>
-            <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#BD413A', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.refuser}>
+            <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#BD413A', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.refuser.bind(this, pending._id)}>
               <Text style={{color: '#fff', fontSize: 20}}>Refuser</Text>
             </TouchableOpacity>
           </View>
