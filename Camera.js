@@ -7,7 +7,6 @@ export default class CameraExample extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.front,
-    pictureTaken: false,
   };
 
   async componentDidMount() {
@@ -19,7 +18,8 @@ export default class CameraExample extends React.Component {
       httpUrl: navigation.getParam('httpUrl', null),
       fieldName: navigation.getParam('fieldName', null),
       fieldValue: navigation.getParam('fieldValue', null),
-      onSuccess: navigation.getParam('onSuccess', null)
+      onSuccess: navigation.getParam('onSuccess', null),
+      pictureTaken: false
     });
     console.log(this.state);
   }

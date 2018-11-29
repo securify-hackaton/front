@@ -31,8 +31,9 @@ export default class WaitingAuthenticate extends React.Component {
 				body: data
 			});
 			console.log(response);
-			if (response.status >= 400) {
-				console.warn(response.message)
+			const responseJson = await response.json()
+			if (responseJson.status >= 400) {
+				console.warn(responseJson.message)
 				this.props.navigation.navigate('Camera', {
 					httpUrl: httpUrl,
 					fieldName: fieldName,
