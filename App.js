@@ -1,11 +1,12 @@
 import React from 'react';
 import Login from './Login';
 import Securify from './Securify';
-
+import { YellowBox } from 'react-native';
 // TO DO : export to register
 import { Notifications } from 'expo';
-
 import registerForPushNotificationsAsync from './registerForPushNotificationsAsync';
+
+YellowBox.ignoreWarnings(["Require cycle:"]);
 
 export default class App extends React.Component {
 
