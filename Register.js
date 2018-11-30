@@ -17,7 +17,7 @@ export default class Register extends React.Component {
   }
 
   register(){
-    
+    this.props.onRegister(this.username, this.password, this.firstName, this.lastName)    
   }
 
   handleTextChange(type, text) {
@@ -48,6 +48,18 @@ export default class Register extends React.Component {
             blurOnSubmit={true}
             onChangeText={this.handleTextChange.bind(this, 'username')}
           ></TextInput>
+          <TextInput 
+            style={Object.assign({}, styles.loginFormInputs, styles.firstInput)}
+            placeholder="Insert your firstname"
+            blurOnSubmit={true}
+            onChangeText={this.handleTextChange.bind(this, 'firstName')}
+          ></TextInput>
+          <TextInput 
+            style={Object.assign({}, styles.loginFormInputs, styles.firstInput)}
+            placeholder="Insert your lastname"
+            blurOnSubmit={true}
+            onChangeText={this.handleTextChange.bind(this, 'lastName')}
+          ></TextInput>
           <TextInput
             style={styles.loginFormInputs}
             textContentType="password"
@@ -67,7 +79,6 @@ export default class Register extends React.Component {
             title="Back to login"
             color="#509F7E"
             accessibilityLabel="login"
-            style={styles.redirectButton}
           />
         </View>
       </View>
@@ -83,12 +94,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10
   },
-  redirectButton: {
-    marginTop: 25
-  },
   loginForm: {
     marginTop: 50,
-    height: 250,
+    height: 400,
     flex: 0.8,
     alignItems: 'flex-end',
     justifyContent: 'center',

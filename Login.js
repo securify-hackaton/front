@@ -51,7 +51,7 @@ export default class Login extends React.Component {
             style={styles.loginFormInputs}
             textContentType="password"
             secureTextEntry={true}
-            placeholder="Mot de passe"
+            placeholder="Password"
             blurOnSubmit={true}
             onChangeText={this.handleTextChange.bind(this, 'password')}
           ></TextInput>
