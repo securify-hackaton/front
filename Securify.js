@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, AsyncStorage } from 'react-native';
+import { StyleSheet, View, AsyncStorage, Platform } from 'react-native';
+import { Permissions, Notifications } from 'expo';
 import Navigation from './Navigation'
 import Login from './Login';
+import Register from './Register';
 import env from './config/env.config'
 
 export default class Securify extends React.Component {
@@ -11,7 +13,8 @@ export default class Securify extends React.Component {
     this.state = {
       isLoggedIn: false,
       user: {},
-      userToken: null
+      userToken: null,
+      whichPage: 'login'
     }
   }
 
@@ -44,12 +47,86 @@ export default class Securify extends React.Component {
     })
   }
 
+  async callRegisterApi(email, password, firstName, lastName) {
+    return new Promise(async (resolve, reject) => {
+
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
+
+      // only ask if permissions have not already been determined, because
+      // iOS won't necessarily prompt the user a second time.
+      if (existingStatus !== 'granted') {
+        // Android remote notification permissions are granted during the app
+        // install, so this will only ask on iOS
+        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        finalStatus = status;
+      }
+
+      // Stop here if the user did not grant permissions
+      if (finalStatus !== 'granted') {
+        return;
+      }
+
+      const deviceId = await Notifications.getExpoPushTokenAsync()
+      console.log("deviceId" + deviceId)
+      const deviceType = Platform.OS;;
+      try {
+        const response = await fetch(env.BASE_URL + '/users', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            deviceId,
+            deviceType,
+            firstName,
+            lastName
+          }),
+        });
+        console.log('response :')
+        console.log(response);
+        const responseJson = await response.json()
+        if (response.status >= 400) {
+          throw new Error(responseJson.message)
+        }
+        resolve(responseJson)
+      } catch (error) {
+        reject(error)
+      }
+    });
+
+  }
+
+
   async loginUser(email, password) {
     try {
       const response = await this.callLoginApi(email, password)
       await AsyncStorage.setItem('isLoggedIn', 'true')
       await AsyncStorage.setItem('currentUser', JSON.stringify(response.user))
       await AsyncStorage.setItem('userToken', JSON.stringify(response.token))
+      this._notificationSubscription = Notifications.addListener(this._handleNotification);
+      this.setState({
+        isLoggedIn: true,
+        user: response.user,
+        userToken: response.token
+      })
+    } catch (error) {
+      console.warn(error.message)
+    }
+  }
+
+  async registerUser(email, password, firstName, lastName) {
+    try {
+      const response = await this.callRegisterApi(email, password, firstName, lastName)
+      await AsyncStorage.setItem('isLoggedIn', 'true')
+      await AsyncStorage.setItem('currentUser', JSON.stringify(response.user))
+      await AsyncStorage.setItem('userToken', JSON.stringify(response.token))
+      this.state.whichPage = 'login';
       this.setState({
         isLoggedIn: true,
         user: response.user,
@@ -80,13 +157,27 @@ export default class Securify extends React.Component {
   async signOut() {
     try {
       await AsyncStorage.multiRemove(['isLoggedIn', 'currentUser', 'userToken'])
-      this.setState({isLoggedIn: !this.isLoggedIn})
+      this.setState({ isLoggedIn: !this.isLoggedIn })
     } catch (error) {
       console.log(error)
     }
   }
 
+  goToRegister() {
+    this.state.whichPage = 'register';
+    console.log('go To register');
+    this.forceUpdate();
+  }
+
+  goToLogin() {
+    this.state.whichPage = 'login';
+    console.log('go To login');
+    this.forceUpdate();
+  }
+
   render() {
+    let whichPage = this.state.whichPage;
+
     let Nav = Navigation();
     if (this.props.fromNotification) {
       Nav = Navigation("Pendings");
@@ -97,16 +188,25 @@ export default class Securify extends React.Component {
           <Nav screenProps={{
             onLogOut: this.signOut.bind(this),
             currentUser: this.state.user,
-            userToken: this.state.userToken 
-          }}/>
+            userToken: this.state.userToken
+          }} />
         </View>
       );
     }
-    return (
-      <View style={styles.container}>
-        <Login onLogin={this.loginUser.bind(this)}/>
-      </View>
-    );
+    if (whichPage === 'login') {
+      return (
+        <View style={styles.container}>
+          <Login onLogin={this.loginUser.bind(this)} goToRegister={this.goToRegister.bind(this)} />
+        </View>
+      );
+    } else if (whichPage === 'register') {
+      return (
+        <View style={styles.container}>
+          <Register onRegister={this.registerUser.bind(this)} goToLogin={this.goToLogin.bind(this)} />
+        </View>
+      );
+    }
+
   }
 }
 

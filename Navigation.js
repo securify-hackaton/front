@@ -5,6 +5,7 @@ import Pendings from './Pendings'
 import Camera from './Camera'
 import Account from './Account'
 import WaitingAuthenticate from './WaitingAuthenticate'
+import Register from './Register'
 
 export const createAppNavigation = (load="Connections") => {
   const AppStackNavigator = createStackNavigator({
