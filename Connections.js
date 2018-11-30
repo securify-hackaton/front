@@ -73,10 +73,15 @@ export default class Connections extends React.Component {
     console.log(actives)
   }
 
+  formatDate(dateStr) {
+    var date = new Date(dateStr)
+    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
+  }
+
   render() {
 
     RenderActives = () => {
-      const actives = this.state.actives.map(active => (
+      const actives = this.state.actives.map((active, index) => (
         <View key={active._id} style={{
           width: '85%',
           height: 80,
@@ -97,7 +102,8 @@ export default class Connections extends React.Component {
           </View>
           <View style={{flex: 1, padding: 10}}>
             <ConnectionGradient></ConnectionGradient>
-            <Text>{active._id}</Text>
+            <Text style={{color:'#fff'}}>{active.company.name} : {active._id.substring(0, 5)}</Text>
+            <Text style={{color:'#ffffff8a'}}>{this.formatDate(active.createdDate)} - {this.formatDate(active.expirationDate)}</Text>
             <TouchableOpacity style={{
                 position: 'absolute',
                 height: 30,
