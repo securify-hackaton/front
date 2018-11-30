@@ -191,10 +191,14 @@ export default class Securify extends React.Component {
   render() {
     let whichPage = this.state.whichPage;
 
+    let Nav = Navigation();
+    if (this.props.fromNotification) {
+      Nav = Navigation("Pendings");
+    }
     if (this.state.isLoggedIn) {
       return (
         <View style={styles.container}>
-          <Navigation screenProps={{
+          <Nav screenProps={{
             onLogOut: this.signOut.bind(this),
             currentUser: this.state.user,
             userToken: this.state.userToken

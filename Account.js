@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
 
