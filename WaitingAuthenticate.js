@@ -32,8 +32,8 @@ export default class WaitingAuthenticate extends React.Component {
 			});
 			console.log(response);
 			if (response.status >= 400) {
-				console.warn("Something went wrong")
-				this.props.navigation.navigate('Camera', {
+				console.warn("You are not " + this.props.screenProps.currentUser.firstName);
+				this.props.navigation.navigate('Pendings', {
 					httpUrl: httpUrl,
 					fieldName: fieldName,
 					fieldValue: fieldValue,

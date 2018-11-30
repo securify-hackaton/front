@@ -131,16 +131,16 @@ export default class Pendings extends React.Component {
             }}/>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{color: '#fff', fontSize: 30, padding: 10, textAlign: 'center', width: '80%'}}>{pending.company.name} souhaite vous authentifier</Text>
+            <Text style={{color: '#fff', fontSize: 30, padding: 10, textAlign: 'center', width: '80%'}}>{pending.company.name} would like to sign in with your account</Text>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'column'}}>
             <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#509F7E', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.autoriser.bind(this, pending._id)}>
-              <Text style={{color: '#fff', fontSize: 20}}>Autoriser</Text>
+              <Text style={{color: '#fff', fontSize: 20}}>Accept</Text>
             </TouchableOpacity>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'column'}}>
             <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#BD413A', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.refuser.bind(this, pending._id)}>
-              <Text style={{color: '#fff', fontSize: 20}}>Refuser</Text>
+              <Text style={{color: '#fff', fontSize: 20}}>Deny</Text>
             </TouchableOpacity>
           </View>
         </View>
