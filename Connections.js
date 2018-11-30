@@ -79,6 +79,14 @@ export default class Connections extends React.Component {
   }
 
   render() {
+    console.log(this.state.actives)
+
+    IsThereConnections = () => {
+      if (this.state.actives.length > 0) {
+        return null
+      }
+      return <Text style={{color: "#fff"}}>You have no connections available 😅</Text>
+    }
 
     RenderActives = () => {
       const actives = this.state.actives.map((active, index) => (
@@ -102,7 +110,7 @@ export default class Connections extends React.Component {
           </View>
           <View style={{flex: 1, padding: 10}}>
             <ConnectionGradient></ConnectionGradient>
-            <Text style={{color:'#fff'}}>{active.company.name} : {active._id.substring(0, 5)}</Text>
+            <Text style={{color:'#fff'}}>{active.company.name} : {active.deviceName}</Text>
             <Text style={{color:'#ffffff8a'}}>{this.formatDate(active.createdDate)} - {this.formatDate(active.expirationDate)}</Text>
             <TouchableOpacity style={{
                 position: 'absolute',
@@ -126,8 +134,9 @@ export default class Connections extends React.Component {
     return (
       <View style={styles.container}>
         <Gradient />
-        <View style={{marginTop: 10, flex:1, alignSelf: 'stretch', alignItems: 'center'}}>
+        <View style={{marginTop: 10, flex:1, alignSelf: 'stretch', alignItems: 'center', justifyContent: (this.state.actives.length > 0)?'flex-start':'center'}}>
           <RenderActives></RenderActives>
+          <IsThereConnections></IsThereConnections>
         </View>
         <NavigationBar />
       </View>

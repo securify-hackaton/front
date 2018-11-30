@@ -159,6 +159,7 @@ export default class Pendings extends React.Component {
       <View style={styles.container}>
         <Gradient/>
         <RenderPendings></RenderPendings>
+        <Text style={{color: "#fff"}}>There are currently no pending requests 😗</Text>
         <NavigationBar/>
       </View>
     );
