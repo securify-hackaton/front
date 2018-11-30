@@ -73,14 +73,6 @@ export default class Securify extends React.Component {
       console.log("deviceId" + deviceId)
       const deviceType = Platform.OS;;
       try {
-        console.log({
-          email,
-          password,
-          deviceId,
-          deviceType,
-          firstName,
-          lastName
-        })
         const response = await fetch(env.BASE_URL + '/users', {
           method: 'POST',
           headers: {
@@ -134,7 +126,6 @@ export default class Securify extends React.Component {
       await AsyncStorage.setItem('isLoggedIn', 'true')
       await AsyncStorage.setItem('currentUser', JSON.stringify(response.user))
       await AsyncStorage.setItem('userToken', JSON.stringify(response.token))
-      this._notificationSubscription = Notifications.addListener(this._handleNotification);
       this.state.whichPage = 'login';
       this.setState({
         isLoggedIn: true,
@@ -144,10 +135,6 @@ export default class Securify extends React.Component {
     } catch (error) {
       console.warn(error.message)
     }
-  }
-
-  _handleNotification = (notification) => {
-    this.setState({ notification: notification });
   }
 
   async isLoggedIn() {
