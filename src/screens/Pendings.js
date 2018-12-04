@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import NavigationBar from './NavigationBar';
-import Gradient from './Gradient';
-import env from '../../config/env.config'
+import Gradient from '../components/Gradient';
+import env from '../../config/env.config';
+import themes from '../../config/theme.config';
 
 export default class Pendings extends React.Component {
 
@@ -95,7 +96,7 @@ export default class Pendings extends React.Component {
             flex: 1
           }}
         >
-          <Gradient style={{position: 'absolute'}}></Gradient>
+          <Gradient style={{position: 'absolute'}} theme={themes.theme1}></Gradient>
           <View style={{flex: 0.4, alignItems: 'center', justifyContent: 'center', marginTop: 25}}>
             <View style={{
               width: 140,
@@ -156,7 +157,7 @@ export default class Pendings extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Gradient/>
+        <Gradient theme={themes.theme1}/>
         <RenderPendings></RenderPendings>
         <Text style={{color: "#fff"}}>There are currently no pending requests 😗</Text>
         <NavigationBar/>

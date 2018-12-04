@@ -1,5 +1,5 @@
 import React from 'react';
-import Securify from './components/Securify';
+import Securify from './screens/Securify';
 import { YellowBox } from 'react-native';
 import { Notifications } from 'expo';
 

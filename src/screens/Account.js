@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import NavigationBar from './NavigationBar';
-import Gradient from './Gradient';
+import Gradient from '../components/Gradient';
+import themes from '../../config/theme.config';
 
 export default class Account extends React.Component {
 
@@ -15,7 +16,7 @@ export default class Account extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Gradient/>
+        <Gradient theme={themes.theme1}/>
         <Text style={{color: '#fff'}}>Hello {this.props.screenProps.currentUser.firstName} {this.props.screenProps.currentUser.lastName}</Text>
         <Button
           onPress={this.goToCamera.bind(this, 'Camera')}

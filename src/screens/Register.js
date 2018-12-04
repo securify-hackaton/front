@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image, TextInput, Button, Text } from 'react-native';
-import { LinearGradient } from 'expo';
+import Gradient from '../components/Gradient';
+import themes from '../../config/theme.config';
 
 export default class Register extends React.Component {
 
@@ -8,16 +9,16 @@ export default class Register extends React.Component {
     super(props);
   }
 
-  username =  ''
+  username = ''
   password = ''
   message = 'REGISTER'
 
-  redirectToLogin(){
+  redirectToLogin() {
     this.props.goToLogin()
   }
 
-  register(){
-    this.props.onRegister(this.username, this.password, this.firstName, this.lastName)    
+  register() {
+    this.props.onRegister(this.username, this.password, this.firstName, this.lastName)
   }
 
   handleTextChange(type, text) {
@@ -27,34 +28,23 @@ export default class Register extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <LinearGradient
-          colors={['#3D393A', '#10101D']}
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0
-          }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
-        />
-        <Image source={require('../../assets/logo.png')} style={{position: 'absolute', top: -5, left: -70}}/>
+        <Gradient theme={themes.theme1} />
+        <Image source={require('../../assets/logo.png')} style={{ position: 'absolute', top: -5, left: -70 }} />
         <View style={styles.loginForm}>
-          <Text style={styles.title}>Create your account</Text>          
-          <TextInput 
+          <Text style={styles.title}>Create your account</Text>
+          <TextInput
             style={Object.assign({}, styles.loginFormInputs, styles.firstInput)}
             placeholder="Insert your email"
             blurOnSubmit={true}
             onChangeText={this.handleTextChange.bind(this, 'username')}
           ></TextInput>
-          <TextInput 
+          <TextInput
             style={Object.assign({}, styles.loginFormInputs, styles.firstInput)}
             placeholder="Insert your firstname"
             blurOnSubmit={true}
             onChangeText={this.handleTextChange.bind(this, 'firstName')}
           ></TextInput>
-          <TextInput 
+          <TextInput
             style={Object.assign({}, styles.loginFormInputs, styles.firstInput)}
             placeholder="Insert your lastname"
             blurOnSubmit={true}

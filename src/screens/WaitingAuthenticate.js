@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator, Dimensions, Image } from 'react-native';
-import Gradient from './Gradient';
+import Gradient from '../components/Gradient';
 import env from '../../config/env.config'
-
+import themes from '../../config/theme.config';
 
 export default class WaitingAuthenticate extends React.Component {
 
@@ -56,7 +56,7 @@ export default class WaitingAuthenticate extends React.Component {
 		const { height, width } = Dimensions.get('window');
 		return (
 			<View style={styles.container}>
-				<Gradient />
+				<Gradient theme={themes.theme1}/>
 				<Image
 					style={{ 
 						width: width, 
