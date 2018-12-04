@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
-import { Notifications } from 'expo';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
 import env from './config/env.config'
@@ -10,7 +9,8 @@ export default class Pendings extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      pendings: []
+      pendings: [],
+      loading: true
     }
   }
 
@@ -41,9 +41,13 @@ export default class Pendings extends React.Component {
         if (response.status >= 400) {
           throw new Error(responseJson.message)
         }
+        this.setState({
+          loading: true
+        })
         const pendings = await this.getPendings()
         this.setState({
-          pendings
+          pendings,
+          loading: false
         })
         resolve(responseJson)
       } catch (error) {
@@ -77,7 +81,8 @@ export default class Pendings extends React.Component {
   async componentDidMount() {
     const pendings = await this.getPendings()
     this.setState({
-      pendings
+      pendings,
+      loading: false
     })
   }
 
@@ -160,20 +165,20 @@ export default class Pendings extends React.Component {
         </View>
       ))
       return pendings
-      /*
-      <FlatList
-            data={this.state.pendings}
-            renderItem={this.renderPendings}
-            keyExtractor={item => item._id}
-          />
-      */
+    }
+
+    Activty = () => {
+      if (this.state.loading) {
+        return <ActivityIndicator size="large" color="#509F7E" />
+      }
+      return <Text style={{color: "#fff"}}>There are currently no pending requests 😗</Text>
     }
 
     return (
       <View style={styles.container}>
         <Gradient/>
         <RenderPendings></RenderPendings>
-        <Text style={{color: "#fff"}}>There are currently no pending requests 😗</Text>
+        <Activty></Activty>
         <NavigationBar/>
       </View>
     );
