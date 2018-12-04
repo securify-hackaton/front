@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator, Dimensions, Image } from 'react-native';
 import Gradient from './Gradient';
-import env from './config/env.config'
+import env from '../../config/env.config'
 
 
 export default class WaitingAuthenticate extends React.Component {

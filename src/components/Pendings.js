@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
-import { Notifications } from 'expo';
 import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
-import env from './config/env.config'
+import env from '../../config/env.config'
 
 export default class Pendings extends React.Component {
 
@@ -122,7 +121,7 @@ export default class Pendings extends React.Component {
               transform: [{'translateX': 40}, {'translateY': 20}]
             }}>
             </View>
-            <Image source={require('./assets/pending-logo.png')} style={{
+            <Image source={require('../../assets/pending-logo.png')} style={{
               width: 60,
               height: 60,
               position: 'absolute',

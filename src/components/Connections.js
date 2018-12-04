@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Button, Image, TouchableOpacity } from 'react-n
 import NavigationBar from './NavigationBar';
 import Gradient from './Gradient';
 import ConnectionGradient from './ConnectionGradient';
-import env from './config/env.config'
+import env from '../../config/env.config'
 
 export default class Connections extends React.Component {
 

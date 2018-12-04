@@ -1,11 +1,11 @@
 import React from 'react';
-import Securify from './Securify';
+import Securify from './components/Securify';
 import { YellowBox } from 'react-native';
 import { Notifications } from 'expo';
 
 YellowBox.ignoreWarnings(["Require cycle:"]);
 
-export default class App extends React.Component {
+class App extends React.Component {
 
   constructor(props) {
     super(props);
@@ -31,3 +31,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default Expo.registerRootComponent(App);
