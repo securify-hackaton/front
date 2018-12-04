@@ -139,8 +139,8 @@ export default class Pendings extends React.Component {
             }}/>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{color: '#fff', fontSize: 20, padding: 10, textAlign: 'center', width: '80%'}}>
-              {pending.deviceName} would like to sign in on {pending.company.name} with your account.
+            <Text style={{color: '#fff', fontSize: 22, padding: 10, textAlign: 'center', width: '80%'}}>
+              {pending.deviceName} wants to access {pending.company.name}.
             </Text>
             <Text style={{color: '#fff', fontSize: 13, padding: 10, textAlign: 'center', width: '80%'}}>
             This will give {pending.company.name} access to:{"\n"}
