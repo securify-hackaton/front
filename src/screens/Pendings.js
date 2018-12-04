@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Gradient from '../components/Gradient';
 import env from '../../config/env.config';
@@ -10,7 +10,8 @@ export default class Pendings extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      pendings: []
+      pendings: [],
+      loading: true
     }
   }
 
@@ -41,9 +42,13 @@ export default class Pendings extends React.Component {
         if (response.status >= 400) {
           throw new Error(responseJson.message)
         }
+        this.setState({
+          loading: true
+        })
         const pendings = await this.getPendings()
         this.setState({
-          pendings
+          pendings,
+          loading: false
         })
         resolve(responseJson)
       } catch (error) {
@@ -77,11 +82,20 @@ export default class Pendings extends React.Component {
   async componentDidMount() {
     const pendings = await this.getPendings()
     this.setState({
-      pendings
+      pendings,
+      loading: false
     })
   }
 
+  scopeList = (pending) => {
+    const scopes = pending.scopes.split(';').map(scope => (
+      scope + '\n'
+    ))
+    return scopes
+  }
+
   render() {
+
     RenderPendings = () => {
       console.log(this.state.pendings)
       const pendings = this.state.pendings.sort((a, b) => a.createdDate > b.createdDate).map((pending, index) => (
@@ -131,7 +145,13 @@ export default class Pendings extends React.Component {
             }}/>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{color: '#fff', fontSize: 30, padding: 10, textAlign: 'center', width: '80%'}}>{pending.company.name} would like to sign in with your account</Text>
+            <Text style={{color: '#fff', fontSize: 22, padding: 10, textAlign: 'center', width: '80%'}}>
+              {pending.deviceName} wants to access {pending.company.name}.
+            </Text>
+            <Text style={{color: '#fff', fontSize: 13, padding: 10, textAlign: 'center', width: '80%'}}>
+            This will give {pending.company.name} access to:{"\n"}
+              {this.scopeList(pending)}
+            </Text>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'column'}}>
             <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#509F7E', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.autoriser.bind(this, pending._id)}>
@@ -146,20 +166,20 @@ export default class Pendings extends React.Component {
         </View>
       ))
       return pendings
-      /*
-      <FlatList
-            data={this.state.pendings}
-            renderItem={this.renderPendings}
-            keyExtractor={item => item._id}
-          />
-      */
+    }
+
+    Activty = () => {
+      if (this.state.loading) {
+        return <ActivityIndicator size="large" color="#509F7E" />
+      }
+      return <Text style={{color: "#fff"}}>There are currently no pending requests 😗</Text>
     }
 
     return (
       <View style={styles.container}>
         <Gradient theme={themes.theme1}/>
         <RenderPendings></RenderPendings>
-        <Text style={{color: "#fff"}}>There are currently no pending requests 😗</Text>
+        <Activty></Activty>
         <NavigationBar/>
       </View>
     );

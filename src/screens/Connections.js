@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Gradient from '../components/Gradient';
 import env from '../../config/env.config';
@@ -10,7 +10,8 @@ export default class Connections extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      actives: []
+      actives: [],
+      loading: true
     }
   }
 
@@ -68,9 +69,9 @@ export default class Connections extends React.Component {
   async componentDidMount() {
     const actives = await this.getActives()
     this.setState({
-      actives
+      actives,
+      loading: false
     })
-    console.log(actives)
   }
 
   formatDate(dateStr) {
@@ -79,9 +80,10 @@ export default class Connections extends React.Component {
   }
 
   render() {
-    console.log(this.state.actives)
-
-    IsThereConnections = () => {
+    Activity = () => {
+      if (this.state.loading) {
+        return <ActivityIndicator size="large" color="#509F7E" />
+      }
       if (this.state.actives.length > 0) {
         return null
       }
@@ -136,7 +138,7 @@ export default class Connections extends React.Component {
         <Gradient theme={themes.theme1}/>
         <View style={{marginTop: 10, flex:1, alignSelf: 'stretch', alignItems: 'center', justifyContent: (this.state.actives.length > 0)?'flex-start':'center'}}>
           <RenderActives></RenderActives>
-          <IsThereConnections></IsThereConnections>
+          <Activity></Activity>
         </View>
         <NavigationBar />
       </View>
