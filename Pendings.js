@@ -81,7 +81,15 @@ export default class Pendings extends React.Component {
     })
   }
 
+  scopeList = (pending) => {
+    const scopes = pending.scopes.split(';').map(scope => (
+      scope + '\n'
+    ))
+    return scopes
+  }
+
   render() {
+
     RenderPendings = () => {
       console.log(this.state.pendings)
       const pendings = this.state.pendings.sort((a, b) => a.createdDate > b.createdDate).map((pending, index) => (
@@ -131,7 +139,13 @@ export default class Pendings extends React.Component {
             }}/>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{color: '#fff', fontSize: 30, padding: 10, textAlign: 'center', width: '80%'}}>{pending.company.name} would like to sign in with your account</Text>
+            <Text style={{color: '#fff', fontSize: 20, padding: 10, textAlign: 'center', width: '80%'}}>
+              {pending.deviceName} would like to sign in on {pending.company.name} with your account.
+            </Text>
+            <Text style={{color: '#fff', fontSize: 13, padding: 10, textAlign: 'center', width: '80%'}}>
+            This will give {pending.company.name} access to:{"\n"}
+              {this.scopeList(pending)}
+            </Text>
           </View>
           <View style={{flex: 0.2, alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'column'}}>
             <TouchableOpacity style={{ height: 60, width: '70%', marginTop: 10, backgroundColor: '#509F7E', alignItems: 'center', justifyContent: 'center', borderRadius: 4}} onPress={this.autoriser.bind(this, pending._id)}>
