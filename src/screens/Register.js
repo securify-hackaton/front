@@ -28,7 +28,7 @@ export default class Register extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Gradient theme={themes.theme1} />
+        <Gradient theme={themes.mainTheme.background} />
         <Image source={require('../../assets/logo.png')} style={{ position: 'absolute', top: -5, left: -70 }} />
         <View style={styles.loginForm}>
           <Text style={styles.title}>Create your account</Text>

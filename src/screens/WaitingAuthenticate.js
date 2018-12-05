@@ -56,7 +56,7 @@ export default class WaitingAuthenticate extends React.Component {
 		const { height, width } = Dimensions.get('window');
 		return (
 			<View style={styles.container}>
-				<Gradient theme={themes.theme1}/>
+				<Gradient theme={themes.mainTheme.background}/>
 				<Image
 					style={{ 
 						width: width, 

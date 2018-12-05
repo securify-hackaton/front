@@ -16,7 +16,7 @@ export default class Account extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Gradient theme={themes.theme1}/>
+        <Gradient theme={themes.mainTheme.background}/>
         <Text style={{color: '#fff'}}>Hello {this.props.screenProps.currentUser.firstName} {this.props.screenProps.currentUser.lastName}</Text>
         <Button
           onPress={this.goToCamera.bind(this, 'Camera')}

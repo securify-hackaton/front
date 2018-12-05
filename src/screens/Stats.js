@@ -9,7 +9,7 @@ export default class Stats extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Gradient theme={themes.theme1}/>
+        <Gradient theme={themes.mainTheme.background}/>
         <Text style={{color: '#fff'}}>Hello I'm The Stats Tab</Text>
         <NavigationBar/>
       </View>

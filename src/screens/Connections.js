@@ -111,7 +111,7 @@ export default class Connections extends React.Component {
             <Image source={{uri: active.company.image}} style={{width: 50, height: 50}}/>
           </View>
           <View style={{flex: 1, padding: 10}}>
-            <Gradient theme={themes.theme2}></Gradient>
+            <Gradient theme={themes.mainTheme.connectionCard}></Gradient>
             <Text style={{color:'#fff'}}>{active.company.name} : {active.deviceName}</Text>
             <Text style={{color:'#ffffff8a'}}>{this.formatDate(active.createdDate)} - {this.formatDate(active.expirationDate)}</Text>
             <TouchableOpacity style={{
@@ -135,7 +135,7 @@ export default class Connections extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Gradient theme={themes.theme1}/>
+        <Gradient theme={themes.mainTheme.background}/>
         <View style={{marginTop: 10, flex:1, alignSelf: 'stretch', alignItems: 'center', justifyContent: (this.state.actives.length > 0)?'flex-start':'center'}}>
           <RenderActives></RenderActives>
           <Activity></Activity>

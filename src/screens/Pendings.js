@@ -110,7 +110,7 @@ export default class Pendings extends React.Component {
             flex: 1
           }}
         >
-          <Gradient style={{position: 'absolute'}} theme={themes.theme1}></Gradient>
+          <Gradient style={{position: 'absolute'}} theme={themes.mainTheme.background}></Gradient>
           <View style={{flex: 0.4, alignItems: 'center', justifyContent: 'center', marginTop: 25}}>
             <View style={{
               width: 140,
@@ -177,7 +177,7 @@ export default class Pendings extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Gradient theme={themes.theme1}/>
+        <Gradient theme={themes.mainTheme.background}/>
         <RenderPendings></RenderPendings>
         <Activty></Activty>
         <NavigationBar/>
