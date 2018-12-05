@@ -4,7 +4,7 @@ import { Permissions, Notifications } from 'expo';
 import Navigation from './Navigation'
 import Login from './Login';
 import Register from './Register';
-import env from './config/env.config'
+import env from '../../config/env.config'
 
 export default class Securify extends React.Component {
 

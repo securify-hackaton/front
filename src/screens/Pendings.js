@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import NavigationBar from './NavigationBar';
-import Gradient from './Gradient';
-import env from './config/env.config'
+import Gradient from '../components/Gradient';
+import env from '../../config/env.config';
+import themes from '../../config/theme.config';
 
 export default class Pendings extends React.Component {
 
@@ -109,7 +110,7 @@ export default class Pendings extends React.Component {
             flex: 1
           }}
         >
-          <Gradient style={{position: 'absolute'}}></Gradient>
+          <Gradient style={{position: 'absolute'}} theme={themes.mainTheme.background}></Gradient>
           <View style={{flex: 0.4, alignItems: 'center', justifyContent: 'center', marginTop: 25}}>
             <View style={{
               width: 140,
@@ -135,7 +136,7 @@ export default class Pendings extends React.Component {
               transform: [{'translateX': 40}, {'translateY': 20}]
             }}>
             </View>
-            <Image source={require('./assets/pending-logo.png')} style={{
+            <Image source={require('../../assets/pending-logo.png')} style={{
               width: 60,
               height: 60,
               position: 'absolute',
@@ -176,7 +177,7 @@ export default class Pendings extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Gradient/>
+        <Gradient theme={themes.mainTheme.background}/>
         <RenderPendings></RenderPendings>
         <Activty></Activty>
         <NavigationBar/>
